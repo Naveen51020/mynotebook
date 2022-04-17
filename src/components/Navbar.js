@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to={!localStorage.getItem("token") ? `/` : "/home"}>
           myNotebook
         </Link>
         <button
@@ -29,9 +29,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">
-                Home
-              </Link>
+              <Link className={`nav-link ${location.pathname === "/home" ? "active" : ""}`} aria-current="page" to={!localStorage.getItem("token") ? `/` : "/home"}>Home</Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">About</Link>
