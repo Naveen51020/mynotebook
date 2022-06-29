@@ -13,16 +13,16 @@ const Signup = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI1NTdjOGVmYjZhNDVlYmRkOWVhZjFkIn0sImlhdCI6MTY0OTkxNTgyMn0.tcbfsVlWh4EIfIesS1cKCA-v_e6zNbqcEsIBzXn9HHs"
+                "auth-token": localStorage.getItem("token")
             },
             body: JSON.stringify({ name, email, password })
         });
         const json = await response.json();
-        console.log(json); 
+        // console.log(json); 
         if (json.success) {
             // Save the auth token and redirect
             localStorage.setItem('token', json.authtoken);
-            navigate("/");
+            navigate("/home");
             props.showAlert("Account Created Successfully", "success");
         } else {
             props.showAlert("Invalid Credentials", "danger");

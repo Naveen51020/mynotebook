@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   let navigate = useNavigate();
+  const [name, setName] = useState("");
+
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setName("");
     navigate("/login");
   }
   let location = useLocation();
+
+  const host = "http://localhost:5000";
+  const fun = async (e)=>{
+      e.preventDefault();
+      const userDetails = await fetch(`${host}/api/auth/getuser`, {
+        method: 'POST',
+        headers: {
+            "auth-token": localStorage.getItem("token")
+        }
+    });
+  
+    const userJson = await userDetails.json();
+    setName(userJson.name);
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,7 +55,15 @@ const Navbar = () => {
           {!localStorage.getItem('token') ? <form className="d-flex">
             <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
             <Link className="btn btn-primary mx-1" to="/signup" role="button">SignUp</Link>
-          </form> : <button onClick={handleLogout} className="btn btn-primary"> Logout</button>}
+          </form> : <>
+              <div className="d-flex">
+                {name === "" ? 
+                <button onClick={fun} className="navbar-brand mb-0 justify-content-end h1"> Show User </button> : 
+                <span className="navbar-brand mb-0 justify-content-end h1"> Welcome! {name} </span>
+                }
+              </div>
+              <button onClick={handleLogout} className="btn btn-primary"> Logout</button>
+          </>}
         </div>
       </div>
     </nav>

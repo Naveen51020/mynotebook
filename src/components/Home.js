@@ -1,4 +1,3 @@
-import Landing from './Landing';
 import Notes from './Notes';
 
 const Home = (props) => {
