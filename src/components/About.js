@@ -35,7 +35,7 @@ function About() {
             <footer>
                 <div className="bottom-details">
                     <div className="bottom_text">
-                        <span className="copyright_text">Copyright © 2022 <Link to="/">myNotebook </Link><br/>All rights reserved</span>
+                        <span className="copyright_text">Copyright © 2022 <Link to="/home">myNotebook </Link><br/>All rights reserved</span>
                     </div>
                 </div>
             </footer>
