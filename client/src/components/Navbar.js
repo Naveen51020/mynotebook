@@ -12,10 +12,10 @@ const Navbar = () => {
   }
   let location = useLocation();
 
-  const host = "http://localhost:5000";
+  const host = window.location.hostname;
   const fun = async (e)=>{
       e.preventDefault();
-      const userDetails = await fetch(`${host}/api/auth/getuser`, {
+      const userDetails = await fetch(`${host}:5000/api/auth/getuser`, {
         method: 'POST',
         headers: {
             "auth-token": localStorage.getItem("token")

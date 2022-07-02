@@ -5,11 +5,11 @@ const Signup = (props) => {
     const [credentials, setCredentials] = useState({name:"", email: "", password: "", cpassword:""});
     let navigate = useNavigate();
 
-    const host = process.env.SERVER_HOST;
+    const host = window.location.hostname;
     const handleSubmit = async (e)=>{
         e.preventDefault();
         const {name, email, password} = credentials;
-        const response = await fetch(`${host}/api/auth/createuser`, {
+        const response = await fetch(`${host}:5000/api/auth/createuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
